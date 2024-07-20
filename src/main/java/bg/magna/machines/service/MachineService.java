@@ -14,4 +14,8 @@ public interface MachineService {
     Boolean machineExists(String serialNumber);
 
     FullMachineDTO add(AddMachineDTO addMachineDTO);
+
+    void deleteById(String id);
+
+    void editById(String id, FullMachineDTO fullMachineDTO);
 }

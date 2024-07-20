@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MachineServiceImpl implements MachineService {
@@ -47,6 +48,30 @@ public class MachineServiceImpl implements MachineService {
         machineRepository.saveAndFlush(machine);
 
         return modelMapper.map(getMachineBySerialNumber(machine.getSerialNumber()), FullMachineDTO.class);
+    }
+
+    @Override
+    public void deleteById(String id) {
+        machineRepository.deleteById(id);
+    }
+
+    @Override
+    public void editById(String id, FullMachineDTO fullMachineDTO) {
+        Machine machine = machineRepository.findById(id).orElseThrow(() -> new MachineNotFoundException("No such machine found"));
+        machine.setSerialNumber(fullMachineDTO.getSerialNumber());
+        machine.setName(fullMachineDTO.getName());
+        machine.setImageURL(fullMachineDTO.getImageURL());
+        machine.setYear(fullMachineDTO.getYear());
+        machine.setBrandName(fullMachineDTO.getBrandName());
+        machine.setDescriptionEn(fullMachineDTO.getDescriptionEn());
+        machine.setDescriptionBg(fullMachineDTO.getDescriptionBg());
+        machine.setWorkingWidth(fullMachineDTO.getWorkingWidth());
+        machine.setWeight(fullMachineDTO.getWeight());
+        machine.setRequiredPower(fullMachineDTO.getRequiredPower());
+        machine.setMoreInfoEn(fullMachineDTO.getMoreInfoEn());
+        machine.setMoreInfoBg(fullMachineDTO.getMoreInfoBg());
+
+        machineRepository.saveAndFlush(machine);
     }
 
     private Machine getMachineBySerialNumber(String serialNumber) {
