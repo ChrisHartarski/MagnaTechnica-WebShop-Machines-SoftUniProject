@@ -74,6 +74,11 @@ public class MachineServiceImpl implements MachineService {
         machineRepository.saveAndFlush(machine);
     }
 
+    @Override
+    public Boolean repositoryEmpty() {
+        return machineRepository.count() == 0;
+    }
+
     private Machine getMachineBySerialNumber(String serialNumber) {
         return machineRepository.findBySerialNumber(serialNumber)
                 .orElseThrow(() -> new MachineNotFoundException("No such machine found"));

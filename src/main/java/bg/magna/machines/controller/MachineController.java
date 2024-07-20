@@ -46,6 +46,12 @@ public class MachineController {
         return ResponseEntity.ok(machineService.machineExists(serialNumber));
     }
 
+
+    @GetMapping("/repository/empty")
+    public ResponseEntity<Boolean> isRepositoryEmpty() {
+        return ResponseEntity.ok(machineService.repositoryEmpty());
+    }
+
     @PostMapping("/add")
     public ResponseEntity<FullMachineDTO> addMachine(@RequestBody AddMachineDTO addMachineDTO) {
         FullMachineDTO machine = machineService.add(addMachineDTO);
