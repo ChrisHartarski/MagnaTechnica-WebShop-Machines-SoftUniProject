@@ -1,7 +1,6 @@
 package bg.magna.machines.model.dto;
 
-public class FullMachineDTO {
-    private String id;
+public class AddMachineDTO {
     private String serialNumber;
     private String name;
     private String imageURL;
@@ -15,31 +14,7 @@ public class FullMachineDTO {
     private String moreInfoEn;
     private String moreInfoBg;
 
-    public FullMachineDTO() {
-    }
-
-    public FullMachineDTO(String id, String serialNumber, String name, String imageURL, int year, String brandName, String descriptionEn, String descriptionBg, double workingWidth, int weight, int requiredPower, String moreInfoEn, String moreInfoBg) {
-        this.id = id;
-        this.serialNumber = serialNumber;
-        this.name = name;
-        this.imageURL = imageURL;
-        this.year = year;
-        this.brandName = brandName;
-        this.descriptionEn = descriptionEn;
-        this.descriptionBg = descriptionBg;
-        this.workingWidth = workingWidth;
-        this.weight = weight;
-        this.requiredPower = requiredPower;
-        this.moreInfoEn = moreInfoEn;
-        this.moreInfoBg = moreInfoBg;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public AddMachineDTO() {
     }
 
     public String getSerialNumber() {
@@ -126,8 +101,8 @@ public class FullMachineDTO {
         return moreInfoEn;
     }
 
-    public void setMoreInfoEn(String moreInfo) {
-        this.moreInfoEn = moreInfo;
+    public void setMoreInfoEn(String moreInfoEn) {
+        this.moreInfoEn = moreInfoEn;
     }
 
     public String getMoreInfoBg() {

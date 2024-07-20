@@ -1,13 +1,12 @@
 package bg.magna.machines.controller;
 
+import bg.magna.machines.model.dto.AddMachineDTO;
 import bg.magna.machines.model.dto.FullMachineDTO;
 import bg.magna.machines.model.dto.ShortMachineDTO;
 import bg.magna.machines.service.MachineService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -29,6 +28,25 @@ public class MachineController {
     @GetMapping("/{id}")
     public ResponseEntity<FullMachineDTO> getById(@PathVariable String id) {
         return ResponseEntity.ok(machineService.getById(id));
+    }
+
+    @GetMapping("/exist/{serialNumber}")
+    public ResponseEntity<Boolean> isMachineExist(@PathVariable String serialNumber) {
+        return ResponseEntity.ok(machineService.machineExists(serialNumber));
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<FullMachineDTO> addMachine(@RequestBody AddMachineDTO addMachineDTO) {
+        FullMachineDTO machine = machineService.add(addMachineDTO);
+        return ResponseEntity.ok().build();
+//        return ResponseEntity.
+//                created(
+//                        ServletUriComponentsBuilder
+//                                .fromCurrentRequest()
+//                                .path("/{id}")
+//                                .buildAndExpand(offerDTO.id())
+//                                .toUri()
+//                ).body(offerDTO);
     }
 
 
