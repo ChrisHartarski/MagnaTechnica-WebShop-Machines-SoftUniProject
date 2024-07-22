@@ -54,7 +54,7 @@ public class MachineController {
 
     @PostMapping("/add")
     public ResponseEntity<FullMachineDTO> addMachine(@RequestBody AddMachineDTO addMachineDTO) {
-        FullMachineDTO machine = machineService.add(addMachineDTO);
+        machineService.add(addMachineDTO);
         return ResponseEntity.ok().build();
     }
 

@@ -13,7 +13,7 @@ public interface MachineService {
 
     Boolean machineExists(String serialNumber);
 
-    FullMachineDTO add(AddMachineDTO addMachineDTO);
+    void add(AddMachineDTO addMachineDTO);
 
     void deleteById(String id);
 

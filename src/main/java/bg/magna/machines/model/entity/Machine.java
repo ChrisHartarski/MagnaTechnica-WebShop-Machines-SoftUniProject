@@ -48,6 +48,22 @@ public class Machine {
     public Machine() {
     }
 
+    public Machine(String id, String serialNumber, String name, String imageURL, int year, String brandName, String descriptionEn, String descriptionBg, double workingWidth, int weight, int requiredPower, String moreInfoEn, String moreInfoBg) {
+        this.id = id;
+        this.serialNumber = serialNumber;
+        this.name = name;
+        this.imageURL = imageURL;
+        this.year = year;
+        this.brandName = brandName;
+        this.descriptionEn = descriptionEn;
+        this.descriptionBg = descriptionBg;
+        this.workingWidth = workingWidth;
+        this.weight = weight;
+        this.requiredPower = requiredPower;
+        this.moreInfoEn = moreInfoEn;
+        this.moreInfoBg = moreInfoBg;
+    }
+
     public String getId() {
         return id;
     }

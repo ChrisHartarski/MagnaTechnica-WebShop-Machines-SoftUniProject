@@ -11,7 +11,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MachineServiceImpl implements MachineService {
@@ -43,11 +42,9 @@ public class MachineServiceImpl implements MachineService {
     }
 
     @Override
-    public FullMachineDTO add(AddMachineDTO addMachineDTO) {
+    public void add(AddMachineDTO addMachineDTO) {
         Machine machine = modelMapper.map(addMachineDTO, Machine.class);
         machineRepository.saveAndFlush(machine);
-
-        return modelMapper.map(getMachineBySerialNumber(machine.getSerialNumber()), FullMachineDTO.class);
     }
 
     @Override
@@ -77,10 +74,5 @@ public class MachineServiceImpl implements MachineService {
     @Override
     public Boolean repositoryEmpty() {
         return machineRepository.count() == 0;
-    }
-
-    private Machine getMachineBySerialNumber(String serialNumber) {
-        return machineRepository.findBySerialNumber(serialNumber)
-                .orElseThrow(() -> new MachineNotFoundException("No such machine found"));
     }
 }
