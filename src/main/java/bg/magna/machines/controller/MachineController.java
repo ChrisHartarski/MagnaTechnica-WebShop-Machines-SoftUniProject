@@ -6,6 +6,7 @@ import bg.magna.machines.model.dto.ShortMachineDTO;
 import bg.magna.machines.service.MachineService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class MachineController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable String id) {
+    public ResponseEntity<FullMachineDTO> deleteById(@PathVariable String id) {
         machineService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
@@ -38,7 +39,7 @@ public class MachineController {
     @PutMapping("/edit/{id}")
     public ResponseEntity<FullMachineDTO> editById(@PathVariable String id, @RequestBody FullMachineDTO fullMachineDTO) {
         machineService.editById(id, fullMachineDTO);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/exist/{serialNumber}")
@@ -54,8 +55,14 @@ public class MachineController {
 
     @PostMapping("/add")
     public ResponseEntity<FullMachineDTO> addMachine(@RequestBody AddMachineDTO addMachineDTO) {
-        machineService.add(addMachineDTO);
-        return ResponseEntity.ok().build();
+        FullMachineDTO fullMachineDTO = machineService.add(addMachineDTO);
+        return ResponseEntity.created(
+                ServletUriComponentsBuilder
+                        .fromCurrentRequest()
+                        .path("/{id}")
+                        .buildAndExpand(fullMachineDTO.getId())
+                        .toUri()
+        ).build();
     }
 
 

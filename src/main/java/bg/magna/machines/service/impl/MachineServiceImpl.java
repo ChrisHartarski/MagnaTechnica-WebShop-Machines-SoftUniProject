@@ -42,9 +42,11 @@ public class MachineServiceImpl implements MachineService {
     }
 
     @Override
-    public void add(AddMachineDTO addMachineDTO) {
+    public FullMachineDTO add(AddMachineDTO addMachineDTO) {
         Machine machine = modelMapper.map(addMachineDTO, Machine.class);
         machineRepository.saveAndFlush(machine);
+
+        return modelMapper.map(machine, FullMachineDTO.class);
     }
 
     @Override
