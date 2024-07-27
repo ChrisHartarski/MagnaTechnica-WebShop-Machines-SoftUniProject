@@ -55,7 +55,7 @@ public class MachineServiceImpl implements MachineService {
     }
 
     @Override
-    public void editById(String id, FullMachineDTO fullMachineDTO) {
+    public FullMachineDTO editById(String id, FullMachineDTO fullMachineDTO) {
         Machine machine = machineRepository.findById(id).orElseThrow(() -> new MachineNotFoundException("No such machine found"));
         machine.setSerialNumber(fullMachineDTO.getSerialNumber());
         machine.setName(fullMachineDTO.getName());
@@ -71,6 +71,8 @@ public class MachineServiceImpl implements MachineService {
         machine.setMoreInfoBg(fullMachineDTO.getMoreInfoBg());
 
         machineRepository.saveAndFlush(machine);
+        Machine editedMachine = machineRepository.findById(machine.getId()).orElseThrow(() -> new MachineNotFoundException("No such machine found"));
+        return modelMapper.map(editedMachine, FullMachineDTO.class);
     }
 
     @Override

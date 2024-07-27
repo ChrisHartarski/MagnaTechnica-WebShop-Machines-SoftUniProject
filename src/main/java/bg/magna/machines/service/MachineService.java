@@ -17,7 +17,7 @@ public interface MachineService {
 
     void deleteById(String id);
 
-    void editById(String id, FullMachineDTO fullMachineDTO);
+    FullMachineDTO editById(String id, FullMachineDTO fullMachineDTO);
 
     Boolean repositoryEmpty();
 }
