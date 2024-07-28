@@ -89,7 +89,8 @@ public class MachineControllerIT {
         Assertions.assertEquals(1, machineRepository.count());
 
         mockMvc.perform(delete("/machines/" + testMachine1.getId()))
-                .andExpect(status().isNoContent());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", is(true)));
 
         Assertions.assertEquals(0, machineRepository.count());
     }

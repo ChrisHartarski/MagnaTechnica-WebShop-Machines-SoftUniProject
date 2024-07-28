@@ -15,7 +15,7 @@ public interface MachineService {
 
     FullMachineDTO add(AddMachineDTO addMachineDTO);
 
-    void deleteById(String id);
+    boolean deleteById(String id);
 
     FullMachineDTO editById(String id, FullMachineDTO fullMachineDTO);
 

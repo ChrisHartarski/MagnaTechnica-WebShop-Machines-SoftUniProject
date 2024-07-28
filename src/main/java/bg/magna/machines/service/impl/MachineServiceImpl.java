@@ -50,8 +50,9 @@ public class MachineServiceImpl implements MachineService {
     }
 
     @Override
-    public void deleteById(String id) {
+    public boolean deleteById(String id) {
         machineRepository.deleteById(id);
+        return !machineRepository.existsById(id);
     }
 
     @Override

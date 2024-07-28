@@ -59,9 +59,9 @@ public class MachineController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<FullMachineDTO> deleteById(@PathVariable String id) {
-        machineService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Boolean> deleteById(@PathVariable String id) {
+        boolean result = machineService.deleteById(id);
+        return ResponseEntity.ok().body(result);
     }
 
     @PutMapping("/edit/{id}")
