@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +27,8 @@ import static org.mockito.Mockito.when;
 public class MachineServiceImplTest {
     private static final Machine TEST_MACHINE_1 = new Machine("UUID1", "serial1", "machine1", "image1URL", 2021, "brandName1", "descriptionEn1", "descriptionBg1", 1.0, 1, 111, "moreInfoEn1", "moreInfoBg1");
     private static final Machine TEST_MACHINE_2 = new Machine("UUID2", "serial2", "machine2", "image2URL", 2022, "brandName2", "descriptionEn2", "descriptionBg2", 2.0, 2, 222, "moreInfoEn2", "moreInfoBg2");
-    private static final ShortMachineDTO TEST_SHORT_DTO_1 = new ShortMachineDTO(TEST_MACHINE_1.getId(), TEST_MACHINE_1.getName(), TEST_MACHINE_1.getImageURL(), TEST_MACHINE_1.getYear(), TEST_MACHINE_1.getBrandName(), TEST_MACHINE_1.getDescriptionEn(), TEST_MACHINE_1.getDescriptionBg());
-    private static final ShortMachineDTO TEST_SHORT_DTO_2 = new ShortMachineDTO(TEST_MACHINE_2.getId(), TEST_MACHINE_2.getName(), TEST_MACHINE_2.getImageURL(), TEST_MACHINE_2.getYear(), TEST_MACHINE_2.getBrandName(), TEST_MACHINE_2.getDescriptionEn(), TEST_MACHINE_2.getDescriptionBg());
+    private static final ShortMachineDTO TEST_SHORT_DTO_1 = new ShortMachineDTO(TEST_MACHINE_1.getId(), TEST_MACHINE_1.getName(), TEST_MACHINE_1.getImageURL(), TEST_MACHINE_1.getYear(), TEST_MACHINE_1.getBrandName(), TEST_MACHINE_1.getDescriptionEn(), TEST_MACHINE_1.getDescriptionBg(), LocalDateTime.now());
+    private static final ShortMachineDTO TEST_SHORT_DTO_2 = new ShortMachineDTO(TEST_MACHINE_2.getId(), TEST_MACHINE_2.getName(), TEST_MACHINE_2.getImageURL(), TEST_MACHINE_2.getYear(), TEST_MACHINE_2.getBrandName(), TEST_MACHINE_2.getDescriptionEn(), TEST_MACHINE_2.getDescriptionBg(), LocalDateTime.now());
     private static final FullMachineDTO TEST_FULL_DTO_1 = new FullMachineDTO(TEST_MACHINE_1.getId(), TEST_MACHINE_1.getSerialNumber(), TEST_MACHINE_1.getName(), TEST_MACHINE_1.getImageURL(), TEST_MACHINE_1.getYear(), TEST_MACHINE_1.getBrandName(), TEST_MACHINE_1.getDescriptionEn(), TEST_MACHINE_1.getDescriptionBg(), TEST_MACHINE_1.getWorkingWidth(), TEST_MACHINE_1.getWeight(), TEST_MACHINE_1.getRequiredPower(), TEST_MACHINE_1.getMoreInfoEn(), TEST_MACHINE_1.getMoreInfoBg());
     private static final FullMachineDTO TEST_FULL_DTO_2 = new FullMachineDTO(TEST_MACHINE_2.getId(), TEST_MACHINE_2.getSerialNumber(), TEST_MACHINE_2.getName(), TEST_MACHINE_2.getImageURL(), TEST_MACHINE_2.getYear(), TEST_MACHINE_2.getBrandName(), TEST_MACHINE_2.getDescriptionEn(), TEST_MACHINE_2.getDescriptionBg(), TEST_MACHINE_2.getWorkingWidth(), TEST_MACHINE_2.getWeight(), TEST_MACHINE_2.getRequiredPower(), TEST_MACHINE_2.getMoreInfoEn(), TEST_MACHINE_2.getMoreInfoBg());
     private static final AddMachineDTO TEST_ADD_DTO_1 = new AddMachineDTO(TEST_MACHINE_1.getSerialNumber(), TEST_MACHINE_1.getName(), TEST_MACHINE_1.getImageURL(), TEST_MACHINE_1.getYear(), TEST_MACHINE_1.getBrandName(), TEST_MACHINE_1.getDescriptionEn(), TEST_MACHINE_1.getDescriptionBg(), TEST_MACHINE_1.getWorkingWidth(), TEST_MACHINE_1.getWeight(), TEST_MACHINE_1.getRequiredPower(), TEST_MACHINE_1.getMoreInfoEn(), TEST_MACHINE_1.getMoreInfoBg());
