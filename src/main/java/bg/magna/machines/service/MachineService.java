@@ -3,11 +3,13 @@ package bg.magna.machines.service;
 import bg.magna.machines.model.dto.AddMachineDTO;
 import bg.magna.machines.model.dto.FullMachineDTO;
 import bg.magna.machines.model.dto.ShortMachineDTO;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedModel;
 
 import java.util.List;
 
 public interface MachineService {
-    List<ShortMachineDTO> getAllMachines();
+    PagedModel<ShortMachineDTO> getAllMachines(Pageable pageable);
 
     FullMachineDTO getById(String id);
 

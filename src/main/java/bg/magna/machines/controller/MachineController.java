@@ -9,6 +9,10 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -26,8 +30,8 @@ public class MachineController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<ShortMachineDTO>> getAllMachines() {
-        return ResponseEntity.ok(machineService.getAllMachines());
+    public ResponseEntity<PagedModel<ShortMachineDTO>> getAllMachines(@PageableDefault(size = 6, sort = "createdOn", direction = Sort.Direction.DESC) Pageable pageable) {
+        return ResponseEntity.ok(machineService.getAllMachines(pageable));
     }
 
     @ApiResponses(

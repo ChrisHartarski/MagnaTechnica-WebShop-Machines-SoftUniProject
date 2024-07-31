@@ -8,6 +8,8 @@ import bg.magna.machines.repository.MachineRepository;
 import bg.magna.machines.service.MachineService;
 import bg.magna.machines.util.exceptions.MachineNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,10 +25,9 @@ public class MachineServiceImpl implements MachineService {
     }
 
     @Override
-    public List<ShortMachineDTO> getAllMachines() {
-        return machineRepository.findAll().stream()
-                .map(m -> modelMapper.map(m, ShortMachineDTO.class))
-                .toList();
+    public PagedModel<ShortMachineDTO> getAllMachines(Pageable pageable) {
+        return new PagedModel<>(machineRepository.findAll(pageable)
+                .map(m -> modelMapper.map(m, ShortMachineDTO.class)));
     }
 
     @Override

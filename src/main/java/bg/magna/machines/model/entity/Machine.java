@@ -2,6 +2,8 @@ package bg.magna.machines.model.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "machines")
 public class Machine {
@@ -45,10 +47,15 @@ public class Machine {
     @Column(name = "more_info_bg")
     private String moreInfoBg;
 
+    @Column(name = "createdOn", nullable = false)
+    private LocalDateTime createdOn;
+
     public Machine() {
+        this.createdOn = LocalDateTime.now();
     }
 
     public Machine(String serialNumber, String name, String imageURL, int year, String brandName, String descriptionEn, String descriptionBg, double workingWidth, int weight, int requiredPower, String moreInfoEn, String moreInfoBg) {
+        super();
         this.serialNumber = serialNumber;
         this.name = name;
         this.imageURL = imageURL;
@@ -64,6 +71,7 @@ public class Machine {
     }
 
     public Machine(String id, String serialNumber, String name, String imageURL, int year, String brandName, String descriptionEn, String descriptionBg, double workingWidth, int weight, int requiredPower, String moreInfoEn, String moreInfoBg) {
+        super();
         this.id = id;
         this.serialNumber = serialNumber;
         this.name = name;
@@ -181,5 +189,13 @@ public class Machine {
 
     public void setMoreInfoBg(String moreInfoBg) {
         this.moreInfoBg = moreInfoBg;
+    }
+
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
     }
 }
