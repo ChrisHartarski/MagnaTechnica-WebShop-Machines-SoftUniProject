@@ -1,6 +1,7 @@
 package bg.magna.machines.config;
 
 import bg.magna.machines.util.LocalDateTimeDeserializer;
+import bg.magna.machines.util.LocalDateTimeSerializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.modelmapper.ModelMapper;
@@ -21,6 +22,7 @@ public class AppConfig {
     public Gson gson() {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
+        builder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
         builder.setPrettyPrinting();
         return builder.create();
     }

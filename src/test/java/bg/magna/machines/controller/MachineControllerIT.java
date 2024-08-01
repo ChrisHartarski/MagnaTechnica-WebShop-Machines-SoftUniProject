@@ -15,9 +15,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedModel;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -50,9 +53,8 @@ public class MachineControllerIT {
         Machine testMachine2 = createTestMachine("serial2", "machine2");
         machineRepository.saveAllAndFlush(List.of(testMachine1, testMachine2));
 
-        List<ShortMachineDTO> result = machineRepository.findAll().stream()
-                .map(m -> modelMapper.map(m, ShortMachineDTO.class))
-                .toList();
+        PagedModel<ShortMachineDTO> result = new PagedModel<>(machineRepository.findAll(Pageable.ofSize(6))
+                                            .map(m -> modelMapper.map(m, ShortMachineDTO.class)));
 
         String expected = gson.toJson(result);
 
@@ -212,7 +214,7 @@ public class MachineControllerIT {
     }
 
     private Machine createTestMachine(String serialNumber, String name) {
-        return new Machine(
+        Machine machine = new Machine(
                 serialNumber,
                 name,
                 "https://someUrl.com",
@@ -226,6 +228,8 @@ public class MachineControllerIT {
                 "moreInfoEn",
                 "moreInfoBg"
         );
+        machine.setCreatedOn(LocalDateTime.now());
+        return machine;
     }
 
     private AddMachineDTO createAddMachineDTO(String serialNumber, String name) {

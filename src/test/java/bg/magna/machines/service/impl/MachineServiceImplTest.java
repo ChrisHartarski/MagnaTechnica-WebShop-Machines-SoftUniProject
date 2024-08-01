@@ -15,11 +15,16 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -48,34 +53,25 @@ public class MachineServiceImplTest {
 
     @Test
     void testGetAllMachines() {
-        List<ShortMachineDTO> expected = List.of(TEST_SHORT_DTO_1, TEST_SHORT_DTO_2);
+        PagedModel<ShortMachineDTO> expected = new PagedModel<ShortMachineDTO>(new PageImpl<>(List.of(TEST_SHORT_DTO_1, TEST_SHORT_DTO_2)));
 
-        when(machineRepository.findAll()).thenReturn(List.of(TEST_MACHINE_1, TEST_MACHINE_2));
+        when(machineRepository.findAll(PageRequest.of(0 , 2))).thenReturn(new PageImpl<>(List.of(TEST_MACHINE_1, TEST_MACHINE_2)));
 
-        List<ShortMachineDTO> actual = toTest.getAllMachines();
+        PagedModel<ShortMachineDTO> actual = toTest.getAllMachines(PageRequest.of(0 , 2));
 
-        Assertions.assertEquals(expected.size(), actual.size());
-        Assertions.assertEquals(expected.get(0).getId(), actual.get(0).getId());
-        Assertions.assertEquals(expected.get(0).getName(), actual.get(0).getName());
-        Assertions.assertEquals(expected.get(0).getBrandName(), actual.get(0).getBrandName());
-        Assertions.assertEquals(expected.get(0).getYear(), actual.get(0).getYear());
-        Assertions.assertEquals(expected.get(0).getDescriptionEn(), actual.get(0).getDescriptionEn());
-        Assertions.assertEquals(expected.get(0).getDescriptionBg(), actual.get(0).getDescriptionBg());
-        Assertions.assertEquals(expected.get(1).getId(), actual.get(1).getId());
-        Assertions.assertEquals(expected.get(1).getName(), actual.get(1).getName());
-        Assertions.assertEquals(expected.get(1).getBrandName(), actual.get(1).getBrandName());
-        Assertions.assertEquals(expected.get(1).getYear(), actual.get(1).getYear());
-        Assertions.assertEquals(expected.get(1).getDescriptionEn(), actual.get(1).getDescriptionEn());
-        Assertions.assertEquals(expected.get(1).getDescriptionBg(), actual.get(1).getDescriptionBg());
-    }
-
-    @Test
-    void testGetAllMachines_ReturnsZeroResults() {
-        when(machineRepository.findAll()).thenReturn(List.of());
-
-        List<ShortMachineDTO> actual = toTest.getAllMachines();
-
-        Assertions.assertEquals(0, actual.size());
+        Assertions.assertEquals(expected.getMetadata().size(), actual.getMetadata().size());
+        Assertions.assertEquals(expected.getContent().get(0).getId(), actual.getContent().get(0).getId());
+        Assertions.assertEquals(expected.getContent().get(0).getName(), actual.getContent().get(0).getName());
+        Assertions.assertEquals(expected.getContent().get(0).getBrandName(), actual.getContent().get(0).getBrandName());
+        Assertions.assertEquals(expected.getContent().get(0).getYear(), actual.getContent().get(0).getYear());
+        Assertions.assertEquals(expected.getContent().get(0).getDescriptionEn(), actual.getContent().get(0).getDescriptionEn());
+        Assertions.assertEquals(expected.getContent().get(0).getDescriptionBg(), actual.getContent().get(0).getDescriptionBg());
+        Assertions.assertEquals(expected.getContent().get(1).getId(), actual.getContent().get(1).getId());
+        Assertions.assertEquals(expected.getContent().get(1).getName(), actual.getContent().get(1).getName());
+        Assertions.assertEquals(expected.getContent().get(1).getBrandName(), actual.getContent().get(1).getBrandName());
+        Assertions.assertEquals(expected.getContent().get(1).getYear(), actual.getContent().get(1).getYear());
+        Assertions.assertEquals(expected.getContent().get(1).getDescriptionEn(), actual.getContent().get(1).getDescriptionEn());
+        Assertions.assertEquals(expected.getContent().get(1).getDescriptionBg(), actual.getContent().get(1).getDescriptionBg());
     }
 
     @Test
