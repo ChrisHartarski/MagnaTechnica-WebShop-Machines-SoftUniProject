@@ -6,8 +6,6 @@ import bg.magna.machines.model.dto.ShortMachineDTO;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedModel;
 
-import java.util.List;
-
 public interface MachineService {
     PagedModel<ShortMachineDTO> getAllMachines(Pageable pageable);
 

@@ -47,7 +47,7 @@ public class Machine {
     @Column(name = "more_info_bg")
     private String moreInfoBg;
 
-    @Column(name = "createdOn", nullable = false)
+    @Column(name = "created_on", nullable = false)
     private LocalDateTime createdOn;
 
     public Machine() {

@@ -8,12 +8,9 @@ import bg.magna.machines.repository.MachineRepository;
 import bg.magna.machines.service.MachineService;
 import bg.magna.machines.util.exceptions.MachineNotFoundException;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedModel;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class MachineServiceImpl implements MachineService {
