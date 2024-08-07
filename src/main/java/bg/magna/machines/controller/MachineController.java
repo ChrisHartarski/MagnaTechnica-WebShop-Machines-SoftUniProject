@@ -5,10 +5,6 @@ import bg.magna.machines.model.dto.FullMachineDTO;
 import bg.magna.machines.model.dto.ShortMachineDTO;
 import bg.magna.machines.service.MachineService;
 import bg.magna.machines.util.exceptions.MachineNotFoundException;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -32,29 +28,6 @@ public class MachineController {
         return ResponseEntity.ok(machineService.getAllMachines(pageable));
     }
 
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Offer details available",
-                            content = {
-                                    @Content(
-                                            mediaType = "application/json",
-                                            schema = @Schema(implementation = ShortMachineDTO.class)
-                                    )
-                            }
-                    ),
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "Offer with this id is not found.",
-                            content = {
-                                    @Content(
-                                            mediaType = "application/json"
-                                    )
-                            }
-                    )
-            }
-    )
     @GetMapping("/{id}")
     public ResponseEntity<FullMachineDTO> getMachine(@PathVariable String id) {
         return ResponseEntity.ok(machineService.getById(id));
